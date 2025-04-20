@@ -10,7 +10,6 @@ npm install react-native-kt-forms
 
 ## Usage
 
-
 ```js
 import { multiply } from 'react-native-kt-forms';
 
@@ -18,7 +17,6 @@ import { multiply } from 'react-native-kt-forms';
 
 const result = await multiply(3, 7);
 ```
-
 
 ## Contributing
 
