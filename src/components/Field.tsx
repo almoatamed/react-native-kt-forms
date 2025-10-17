@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import { type ThemedTextProps, ThemedText } from './ThemedText';
 import { ThemedView } from './ThemedView';
-import type { Merge } from './UnvalidatedInputs/TonalTextInput';
+import type { Merge } from './InvalidatedInputs/TonalTextInput';
 export type FieldProps = Merge<
   {
     label?: string;

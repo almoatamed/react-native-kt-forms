@@ -2,7 +2,7 @@ import { type FC } from 'react';
 import { Text, View, type DimensionValue } from 'react-native';
 import Screen from '../Screen';
 import { Button, type Props as ButtonProps } from '../Button';
-import type { SvgProps } from '../UnvalidatedInputs/TonalTextInput';
+import type { SvgProps } from '../InvalidatedInputs/TonalTextInput';
 import { useCurrentThemeColors } from '../../hooks/useColorScheme';
 import { defaultPadding } from '../../constants/styling';
 

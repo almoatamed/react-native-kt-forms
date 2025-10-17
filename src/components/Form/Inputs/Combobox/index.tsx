@@ -1,6 +1,6 @@
 import { Loading } from '../../../LoadingFullView';
 import { Modal, Portal } from '../../../Modal';
-import { TonalTextInput } from '../../../UnvalidatedInputs/TonalTextInput';
+import { TonalTextInput } from '../../../InvalidatedInputs/TonalTextInput';
 import { type RulesList } from '../../../../client-validation-rules';
 import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { FlashList } from '@shopify/flash-list';

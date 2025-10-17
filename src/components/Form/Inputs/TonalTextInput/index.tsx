@@ -17,7 +17,7 @@ import { useFormValidation } from '../../UseFormValidation';
 import { ThemedText } from '../../../ThemedText';
 import { ThemedView } from '../../../ThemedView';
 import type { Merge } from '../../../../common';
-import type { SvgProps } from '../../../UnvalidatedInputs/TonalTextInput';
+import type { SvgProps } from '../../../InvalidatedInputs/TonalTextInput';
 import type { RulesList } from '../../../../client-validation-rules';
 import { useCurrentThemeColors } from '../../../../hooks/useColorScheme';
 

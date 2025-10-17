@@ -8,7 +8,7 @@ import {
   useCurrentThemeColors,
 } from '../../../../hooks/useColorScheme';
 import { dashDateFormatter } from '../../../../common';
-import { TonalTextInput } from '../../../UnvalidatedInputs/TonalTextInput';
+import { TonalTextInput } from '../../../InvalidatedInputs/TonalTextInput';
 
 const Text = ThemedText;
 

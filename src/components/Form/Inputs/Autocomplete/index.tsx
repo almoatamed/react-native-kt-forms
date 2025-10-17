@@ -10,7 +10,7 @@ import {
 
 import { Modal, Portal } from '../../../Modal';
 import { Button } from '../../../Button';
-import { TonalTextInput } from '../../../UnvalidatedInputs/TonalTextInput';
+import { TonalTextInput } from '../../../InvalidatedInputs/TonalTextInput';
 import { type RulesList } from '../../../../client-validation-rules';
 import { FlashList } from '@shopify/flash-list';
 import { ActivityIndicator } from 'react-native';
