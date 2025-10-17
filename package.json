@@ -1,6 +1,6 @@
 {
   "name": "react-native-kt-forms",
-  "version": "0.1.1",
+  "version": "0.1.4",
   "description": "inputs, forms, rules, verys simple to use and easy to validate while being extremely performant",
   "source": "./src/index.tsx",
   "main": "./lib/module/index.js",
