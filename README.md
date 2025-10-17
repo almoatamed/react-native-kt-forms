@@ -138,6 +138,117 @@ function ThemedExample() {
 - This README was generated from `src/index.ts` exports and the repository layout. A few prop names and hook return values are inferred from common conventions. Please adjust examples to match the real signatures if they differ.
 - The `example/` app in this repo is the best source of truth for exact usage.
 
+## Form inputs reference
+
+Below are usage examples for each input component provided under `src/components/Form/Inputs`. These snippets follow the components' real props as implemented in the source.
+
+TonalTextInput
+
+```tsx
+<Form.TonalTextInput
+    id="name"
+    title="name"
+    label="Full name"
+    value={name}
+    onChangeText={(text) => setName(text)}
+    rules={[rules.required('Name')]}
+    variant="outlined"
+    placeholder="Your full name"
+/>
+```
+
+Autocomplete (data-backed)
+
+```tsx
+<Autocomplete
+    type="data"
+    title="Choose city"
+    label="City"
+    data={[ 'Cairo', 'London', 'New York' ]}
+    text={(item) => String(item)}
+    selectedItem={selectedCity}
+    onChose={(item) => setSelectedCity(item)}
+    onClear={(mounted_clear) => { if (!mounted_clear) setSelectedCity(null); }}
+    rules={[rules.required('City')]}
+/>
+```
+
+Autocomplete (remote API)
+
+```tsx
+<Autocomplete
+    type="unknownApi"
+    title="Choose user"
+    label="User"
+    url="/api/users/search"
+    body={{ q: 'search term' }}
+    apiSelector={(data) => data.users}
+    text={(user) => `${user.firstName} ${user.lastName}`}
+    selectedItem={selectedUser}
+    onChose={(u) => setSelectedUser(u)}
+    onClear={() => setSelectedUser(null)}
+/>
+```
+
+Combobox
+
+```tsx
+<Combobox
+    title="Select option"
+    label="Option"
+    value={value}
+    onTextChange={(v) => setValue(v)}
+    data={[ 'Option A', 'Option B' ]}
+    type="dada"
+    textExtractor={(item) => String(item)}
+    placeholder="Start typing"
+    rules={[rules.required('Option')]}
+/>
+```
+
+DatePicker
+
+```tsx
+<DatePicker
+    title="Birthdate"
+    label="Birthdate"
+    shown={showDatePicker}
+    onShow={() => setShowDatePicker(true)}
+    onConfirm={(d) => { setBirthdate(d); setShowDatePicker(false); }}
+    onCancel={() => setShowDatePicker(false)}
+    value={birthdate}
+    mode="date"
+    rules={[rules.required('Birthdate')]}
+/>
+```
+
+DateTimePicker
+
+```tsx
+<DateTimePicker
+    title="Appointment"
+    shown={showDateTime}
+    onShow={() => setShowDateTime(true)}
+    onConfirm={(d) => { setAppointment(d); setShowDateTime(false); }}
+    onCancel={() => setShowDateTime(false)}
+    value={appointment}
+    mode="datetime"
+    rules={[rules.required('Appointment')]}
+/>
+```
+
+OptionsButtons
+
+```tsx
+<OptionsButtons
+    label="Choose one"
+    options={[{ text: 'Yes', value: 'yes' }, { text: 'No', value: 'no' }]}
+    value={opt}
+    onValueChange={(v) => setOpt(v)}
+    rules={[rules.required('Choice')]}
+/>
+```
+
 ## Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
