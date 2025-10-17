@@ -249,6 +249,110 @@ OptionsButtons
 />
 ```
 
+## Form provider — API headers (auth) & theme overrides
+
+The package's provider (exported as `FormProvider` in the public API — implemented as `ApiProvider` in the source) accepts two optional props you can use to configure the underlying axios instance and to override the theme used by components.
+
+- `headers` — an object merged into the axios defaults. Useful for adding Authorization tokens and custom headers used by your backend.
+- `theme` — an object matching a subset of the internal theme keys (you can override as many or as few colors as you need). Components will use values from the provided theme when present.
+
+Simple example — static headers and theme:
+
+```tsx
+import React from 'react';
+import { FormProvider } from 'react-native-kt-forms';
+import App from './App';
+
+const customTheme = {
+    primary: '#0066FF',
+    surface: '#FFFFFF',
+    onPrimary: '#FFFFFF',
+    onSurface: '#111111',
+};
+
+export default function Root() {
+    const user = useUser(); // or some state where you store your user session authentication stuff and tokens
+    return (
+        <FormProvider
+            headers={{ Authorization: `Bearer ${user?.token}`, 'X-App-Version': '1.2.3' }}
+            theme={customTheme}
+        >
+            <App />
+        </FormProvider>
+    );
+}
+```
+
+Accessing the axios instance and the active theme in a component:
+
+```tsx
+import React from 'react';
+import { useApi } from 'react-native-kt-forms';
+
+function Example() {
+    const { api, theme } = useApi();
+
+    async function send() {
+        const res = await api.post('/endpoint', { hello: 'world' });
+        return res.data;
+    }
+
+    return (
+        // render UI using theme.primary, theme.surface, etc.
+        null
+    );
+}
+```
+
+Notes
+
+- `headers` are merged via `api.defaults.headers = {...api.defaults.headers, ...(props.headers || {})}` so you can pass any axios header value.
+- `theme` may include the small set of keys used by components (for example `primary`, `surface`, `onPrimary`, `onSurface`) — the Theme type in the source lists all supported keys; most are optional and you can override only the ones you need.
+- `FormProvider` is the same implementation as `ApiProvider` in the source; it exposes `useApi()` to access the axios `api` instance and the provided `theme`.
+
+### Base URL behavior
+
+The provider accepts an optional `baseUrl` prop. If you don't provide `baseUrl`, the provider falls back to the environment variable `EXPO_PUBLIC_BASE_URL` (used by the example and many Expo setups).
+
+- Precedence: `baseUrl` prop (if provided) takes priority over `EXPO_PUBLIC_BASE_URL`.
+- Dynamic update: when `baseUrl` changes (you re-render `FormProvider` with a new value), the provider updates the axios instance defaults (`api.defaults.baseURL`) so subsequent requests use the new base URL.
+
+Examples
+
+Static environment variable (no prop):
+
+```tsx
+// set EXPO_PUBLIC_BASE_URL in your environment or .env
+<FormProvider>
+    <App />
+</FormProvider>
+```
+
+Static prop:
+
+```tsx
+<FormProvider baseUrl="https://api.example.com">
+    <App />
+</FormProvider>
+```
+
+Dynamic update example (switching APIs at runtime):
+
+```tsx
+function Root() {
+    const [baseUrl, setBaseUrl] = useState('https://api.example.com');
+
+    // to switch
+    // setBaseUrl('https://staging.example.com');
+
+    return (
+        <FormProvider baseUrl={baseUrl}>
+            <App />
+        </FormProvider>
+    );
+}
+```
+
 ## Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.

@@ -76,6 +76,7 @@ export const useApi = () => {
 
 export const ApiProvider = (
   props: PropsWithChildren & {
+    baseUrl?: string;
     headers?: HeadersDefaults & {
       [key: string]: AxiosHeaderValue;
     };
@@ -84,7 +85,7 @@ export const ApiProvider = (
 ) => {
   const api = useMemo(() => {
     const instance = axios.create({
-      baseURL: process.env.EXPO_PUBLIC_BASE_URL,
+      baseURL: props.baseUrl || process.env.EXPO_PUBLIC_BASE_URL,
       timeout: 120e3,
     });
     return instance;
@@ -95,7 +96,8 @@ export const ApiProvider = (
       ...api.defaults.headers,
       ...(props.headers || {}),
     };
-  }, [props.headers]);
+    api.defaults.baseURL = props.baseUrl || process.env.EXPO_PUBLIC_BASE_URL;
+  }, [props.headers, props.baseUrl]);
 
   return (
     <apiContext.Provider
