@@ -8,6 +8,6 @@ export const useCurrentThemeColors = () => {
   const { theme } = useApi();
   return {
     ...Colors[useColorScheme() || 'light'],
-    ...(theme || {}),
+    ...(theme?.[useColorScheme() || 'light'] || {}),
   };
 };

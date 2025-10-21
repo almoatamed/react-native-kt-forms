@@ -264,10 +264,13 @@ import { FormProvider } from 'react-native-kt-forms';
 import App from './App';
 
 const customTheme = {
-    primary: '#0066FF',
-    surface: '#FFFFFF',
-    onPrimary: '#FFFFFF',
-    onSurface: '#111111',
+    // override some colors in light theme 
+    light: {
+        primary: '#0066FF',
+        surface: '#FFFFFF',
+        onPrimary: '#FFFFFF',
+        onSurface: '#111111',
+    }
 };
 
 export default function Root() {
